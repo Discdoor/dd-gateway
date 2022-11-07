@@ -1,0 +1,6 @@
+[
+    {
+        "url": "auth",
+        "target": "http://localhost:8082/auth"
+    }
+]
