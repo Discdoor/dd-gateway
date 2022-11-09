@@ -16,8 +16,7 @@ const apis = require('./data/apis.json');
  */
 const appContext = {
     cfg,
-    app,
-    sessionMgr: null
+    app
 }
 
 // Setup cors
