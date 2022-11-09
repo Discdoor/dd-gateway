@@ -26,9 +26,13 @@ app.use(cors({ origin: cfg.cors.allowedHost }))
 app.use(express.json());
 
 // Load the routes
-loadAllRoutes(appContext, [
-    "routes/auth"
-]);
+// Disable for now
+// loadAllRoutes(appContext, [
+//     "routes/auth"
+// ]);
+
+// Create route proxy
+app.use(`/${cfg.api.version}/auth`, proxy(apis.auth));
 
 /**
  * Version endpoint.
