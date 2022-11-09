@@ -10,13 +10,9 @@ Before using it, ensure all submodules are synced first! This is important since
 
 * NodeJS v16 or newer.
 
-* A valid Redis installation.
-
 ## How to get started
 
 * Ensure submodules are synchronized and up-to-date.
-
-* Ensure Redis is running.
 
 * Run `npm install` to install all dependencies.
 
