@@ -10,6 +10,7 @@ const { loadAllRoutes } = require('./lib/routeloader');
 const cors = require('cors');
 const apis = require('./data/apis.json');
 const { Cacher } = require('./lib/cache/cacher');
+const { sendResponseObject, constructResponseObject } = require('libdd-node').api;
 
 /**
  * The current application context.
@@ -28,7 +29,7 @@ app.use(cors({ origin: cfg.cors.allowedHost }))
 app.use(express.json());
 
 // Create route proxy
-app.use(`/${cfg.api.version}/auth`, proxy(apis.auth));
+app.use(`/${cfg.api.version}/auth`, express.raw({ limit: '2mb' }), proxy(apis.auth));
 
 /**
  * Version endpoint.
@@ -62,6 +63,15 @@ loadAllRoutes(appContext, [
 // -----------------------------
 
 // ---------------------------------------------------------------------------------------- //
+
+/** 
+ * Error middleware.
+ */
+app.use((error, req, res, next) => {
+    console.log(error);
+    if(error) 
+        sendResponseObject(res, 500, constructResponseObject(false, error.message || ""));
+});
 
 /**
  * Entry point.
