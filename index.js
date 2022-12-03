@@ -27,12 +27,6 @@ app.use(cors({ origin: cfg.cors.allowedHost }))
 // Use json body parser
 app.use(express.json());
 
-// Load the routes
-// Disable for now
-// loadAllRoutes(appContext, [
-//     "routes/auth"
-// ]);
-
 // Create route proxy
 app.use(`/${cfg.api.version}/auth`, proxy(apis.auth));
 
@@ -62,7 +56,9 @@ app.use(`/${cfg.api.version}/user/relations/@me`, (req, res, next) => {
 // ------------------------------------
 
 // ---- USER DATA RETRIEVAL ----
-
+loadAllRoutes(appContext, [
+    "routes/user"
+]);
 // -----------------------------
 
 // ---------------------------------------------------------------------------------------- //

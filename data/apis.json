@@ -1,4 +1,5 @@
 {
     "auth": "http://localhost:8082",
-    "usersvc": "http://localhost:1927"
+    "usersvc": "http://localhost:1927",
+    "cdn": "http://localhost:8083"
 }
