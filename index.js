@@ -11,6 +11,7 @@ const cors = require('cors');
 const apis = require('./data/apis.json');
 const { Cacher } = require('./lib/cache/cacher');
 const { sendResponseObject, constructResponseObject } = require('libdd-node').api;
+const morgan = require('morgan');
 
 /**
  * The current application context.
@@ -23,7 +24,10 @@ const appContext = {
 }
 
 // Setup cors
-app.use(cors({ origin: cfg.cors.allowedHost }))
+app.use(cors({ origin: cfg.cors.allowedHost }));
+
+// Setup logger
+app.use(morgan('dev'));
 
 // Use json body parser
 app.use(express.json());

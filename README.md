@@ -2,20 +2,31 @@
 
 This is the gateway server for Discdoor. Think of it as the backbone of the entire platform - this service decides which requests go to what subservices!
 
-Before using it, ensure all submodules are synced first! This is important since the gateway directly hosts the client, which is in a separate module!
-
 ## System requirements
 
-* Microsoft Windows 10 or later.
-
 * NodeJS v16 or newer.
+* Docker (if you wish to dockerize)
 
-## How to get started
+## Installing dependencies
+To install all project dependencies, run `npm install` inside the project folder.
 
-* Ensure submodules are synchronized and up-to-date.
+## Running
+Below are instructions to help you run `dd-gateway`.
 
-* Run `npm install` to install all dependencies.
+### Development
+To run a development server, execute the following commands.
+- `npm run dev`
 
-* Run `node index.js` to start the server.
+### Production (local)
+To run this for production locally, run the following commands.
+- `npm run start`
 
-* Open a browser and navigate to `localhost:9000` to visit the local Discdoor instance.
+### Production (dockerized, preferred)
+Simply create an image from the Dockerfile included here.
+
+To do this, run `docker build -t dd-gateway .` in the repository root.
+
+Then you can create a container based on this image.
+
+## Testing
+To run the unit tests for this project, run `npm test`. A successful pass is required before making any commits to this project.
