@@ -23,7 +23,8 @@ const wshost = require('./lib/events/sockhost');
 const appContext = {
     cfg,
     app,
-    userCache: new Cacher()
+    userCache: new Cacher(apis.auth + "/user/%ID%/view"),
+    wshost
 }
 
 // Setup cors
@@ -63,16 +64,16 @@ app.use(wsmapper.handler);
 
 // Add relations redir
 app.use(`/${cfg.api.version}/user/relations/@me`, (req, res, next) => {
-    console.log(req.wsclient);
     req.url = `/relations/${req.user.id}${req.url}`;
     proxy(`${apis.usersvc}/relations/${req.user.id}`)(req, res, next);
 });
 
 // ------------------------------------
 
-// ---- USER DATA RETRIEVAL ----
+// ---- Load routes ----
 loadAllRoutes(appContext, [
-    "routes/user"
+    "routes/user",
+    "routes/relations"
 ]);
 // -----------------------------
 
@@ -95,7 +96,7 @@ async function main() {
     await wshost.init(server);
 
     // Do any necessary setup
-    server.listen(cfg.http.port, () => {
+    server.listen(cfg.http.port, async() => {
         console.log(`Gateway available at :${cfg.http.port}`);
     });
 }
