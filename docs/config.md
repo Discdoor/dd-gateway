@@ -28,6 +28,8 @@ This folder has two files:
 
 - `cors.allowedHost` usually refers to the client host for which the gateway is to accept requests from. 
 
+- `api.version` api gateway version number. should be incremeneted each major release.
+
 ### apis.json
 ```json
 {

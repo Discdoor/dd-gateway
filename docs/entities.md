@@ -13,4 +13,4 @@ Entities have the following characteristics:
 
 Entities are cached using a `Cacher` object in the gateway. This cacher object can either only retrieve objects from the cache, or primarily fetch from the cache and only fetch remotely if there is no locally cached entity.
 
-Caching is incredibly important in a primarily realtime service such as the gateway.
+Caching is incredibly important in a primarily realtime service such as the gateway, since any speed boost is welcome (DB hits are expensive when done in bulk).
