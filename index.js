@@ -56,8 +56,14 @@ umapper.addRoutes([`^/${cfg.api.version}/user/relations`]);
 
 app.use(umapper.handler);
 
+// Websocket client mapper
+const wsmapper = require('./lib/middleware/ws-client-mapper');
+wsmapper.setHost(wshost);
+app.use(wsmapper.handler);
+
 // Add relations redir
 app.use(`/${cfg.api.version}/user/relations/@me`, (req, res, next) => {
+    console.log(req.wsclient);
     req.url = `/relations/${req.user.id}${req.url}`;
     proxy(`${apis.usersvc}/relations/${req.user.id}`)(req, res, next);
 });
