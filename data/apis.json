@@ -1,5 +1,6 @@
 {
     "auth": "http://localhost:8082",
     "usersvc": "http://localhost:1927",
+    "msgsvc": "http://localhost:1928",
     "cdn": "http://localhost:8083"
 }

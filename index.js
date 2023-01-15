@@ -24,6 +24,7 @@ const appContext = {
     cfg,
     app,
     userCache: new Cacher(apis.auth + "/user/%ID%/view"),
+    channelCache: new Cacher(apis.msgsvc + "/channels/%ID%"),
     wshost
 }
 
@@ -55,6 +56,9 @@ umapper.addRoutes([`^/socket.io`]);
 // Add user relation manager routes
 umapper.addRoutes([`^/${cfg.api.version}/user/relations`]);
 
+umapper.addRoutes([`^/${cfg.api.version}/channels`]);
+umapper.addRoutes([`^/${cfg.api.version}/messages`]);
+
 app.use(umapper.handler);
 
 // Websocket client mapper
@@ -73,7 +77,8 @@ app.use(`/${cfg.api.version}/user/relations/@me`, (req, res, next) => {
 // ---- Load routes ----
 loadAllRoutes(appContext, [
     "routes/user",
-    "routes/relations"
+    "routes/relations",
+    "routes/messaging"
 ]);
 // -----------------------------
 
