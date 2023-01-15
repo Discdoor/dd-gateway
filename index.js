@@ -12,6 +12,9 @@ const apis = require('./data/apis.json');
 const { Cacher } = require('./lib/cache/cacher');
 const { sendResponseObject, constructResponseObject } = require('libdd-node').api;
 const morgan = require('morgan');
+const http = require('http');
+const server = http.createServer(app);
+const wshost = require('./lib/events/sockhost');
 
 /**
  * The current application context.
@@ -45,7 +48,8 @@ app.get(`/${cfg.api.version}/ver`, (req, res)=>res.end(JSON.stringify({ version:
 const umapper = require('./lib/middleware/user-mapper');
 umapper.setUserCache(appContext.userCache); // Set cache
 
-// ---- USER SERVICE AND RELATIONS ----
+// Add websocket route
+umapper.addRoutes([`^/socket.io`]);
 
 // Add user relation manager routes
 umapper.addRoutes([`^/${cfg.api.version}/user/relations`]);
@@ -81,8 +85,11 @@ app.use((error, req, res, next) => {
  * Entry point.
  */
 async function main() {
+    // Initialize WS part of gateway
+    await wshost.init(server);
+
     // Do any necessary setup
-    app.listen(cfg.http.port, () => {
+    server.listen(cfg.http.port, () => {
         console.log(`Gateway available at :${cfg.http.port}`);
     });
 }

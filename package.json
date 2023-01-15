@@ -25,7 +25,8 @@
     "express": "^4.18.1",
     "express-http-proxy": "^1.6.3",
     "libdd-node": "github:Discdoor/libdd-node",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "jest": "^29.3.1",
